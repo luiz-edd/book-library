@@ -1,0 +1,38 @@
+* {
+    box-sizing: border-box;
+    /* outline: 1px solid black; */
+}
+body {
+    margin: 0;
+}
+.container{
+    margin: 100px 15%;
+    /* width: clamp(500px, 80%, 1000px); */
+    display: flex;
+    justify-self: center;
+    align-self: center;
+    gap: 20px;
+}
+.new-book-form {
+    width: 200px;
+    height: 300px;
+    flex: 0 1 auto;
+}
+.library-container {
+    flex: 1 1 auto;
+    display: grid;
+    /* align-content: start; */
+    gap: 20px;
+    
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-rows: repeat(auto-fit, 100px);
+}
+.book-card {
+    height: 100px;
+     outline: 1px solid brown;
+}
+
+/* button */
+.new-book-form > button {
+    
+}
