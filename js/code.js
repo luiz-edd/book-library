@@ -1,7 +1,15 @@
 // variables
 let myLibrary = []; 
-const newBook = document.querySelector(".new-book");
+//node
 const library = document.querySelector(".library-container");
+const form = document.querySelector("#form-book");
+const title = form.elements["title"];
+const author = form.elements["author"]; 
+const pages = form.elements["pages"];
+const readed = form.elements["readed"];
+
+
+
 
 
 // cardBook.innerHTML =`<div>Title: <span></span></div>
@@ -10,8 +18,8 @@ const library = document.querySelector(".library-container");
 // <div>ID: <span></span></div>
 // <div>Readed: <span></span></div>`;
 
-// functions
-function Book(title, author, pages, readed){ //constructor
+// constructor and prototypes
+function Book(title, author, pages, readed){ 
     this.title = title;
     this.author = author;
     this.pages = pages;
@@ -23,6 +31,7 @@ Book.prototype.info = function(){
     return `${this.title}, ${this.author}, ${this.pages} pages, ${this.readed}`;
 }
 
+//functions
 function addBookToLibrary(book){
     myLibrary.push(book);
 }
@@ -37,11 +46,14 @@ function displayLibrary(){
 
 function addCardBookText(cardNode){
     // let cardBook = document.createElement('div');
-    cardNode.innerHTML =`<div>Title: <span></span></div>
-    <div>Author: <span></span></div>
-    <div>Pages: <span></span></div>
+    let auxString =""
+    readed.checked ? auxString = "Yes" : auxString = "No";
+
+    cardNode.innerHTML =`<div>Title: <span>${title.value}</span></div>
+    <div>Author: <span>${author.value}</span></div>
+    <div>Pages: <span>${pages.value}</span></div>
     <div>ID: <span></span></div>
-    <div>Readed: <span></span></div>`;
+    <div>Readed: <span>${auxString}</span></div>`;
 }
 
 function createCardBook() {
@@ -57,6 +69,8 @@ function createCardBook() {
  
 
 // events   
-newBook.addEventListener("click", () => {
+form.addEventListener("submit", (event) => {
+    event.preventDefault()
     createCardBook();
+    form.reset();
 })
