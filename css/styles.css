@@ -25,10 +25,10 @@ body {
     gap: 20px;
     
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    grid-template-rows: repeat(auto-fit, 100px);
+    grid-template-rows: repeat(auto-fill, 125px);
 }
 .book-card {
-    height: 100px;
+    height: 125px;
     outline: 1px solid brown;
 }
 
