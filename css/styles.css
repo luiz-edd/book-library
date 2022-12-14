@@ -5,6 +5,10 @@
 body {
     margin: 0;
 }
+h1 {
+    margin: 40px;
+    text-align: center;
+}
 .container{
     margin: 100px 15%;
     /* width: clamp(500px, 80%, 1000px); */
