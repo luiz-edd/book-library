@@ -1,42 +1,155 @@
 * {
     box-sizing: border-box;
     /* outline: 1px solid black; */
+    
+    font-family: 'DM Sans', sans-serif;
+
 }
+
 body {
     margin: 0;
+    background-color: #ce946d;
 }
+
 h1 {
     margin: 40px;
     text-align: center;
 }
-.container{
-    margin: 100px 15%;
+
+.container {
+    margin: auto 10%;
     /* width: clamp(500px, 80%, 1000px); */
     display: flex;
     justify-self: center;
     align-self: center;
     gap: 20px;
 }
+
 .new-book-form {
-    width: 200px;
+    width: 250px;
     height: 300px;
     flex: 0 1 auto;
 }
+
 .library-container {
     flex: 1 1 auto;
     display: grid;
     /* align-content: start; */
     gap: 20px;
-    
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    grid-template-rows: repeat(auto-fill, 125px);
-}
-.book-card {
-    height: 125px;
-    outline: 1px solid brown;
+    grid-template-columns: repeat(auto-fill, minmax(250px, auto));
+    grid-template-rows: repeat(auto-fit, 150px);
 }
 
-/* button */
-.new-book-form > button {
-    
+.book-card {
+    /* height: auto; */
+    outline: 3px solid rgb(0, 0, 0);
+    padding: 15px;
 }
+
+
+.library-container * {
+    background-color: rgb(121, 60, 60);
+    color: beige;
+}
+/* button */
+.new-book-form button {
+    border: 2px solid black;
+    padding: 6px 15px;
+    background-color: rgb(121, 60, 60);
+    color: beige;
+    border-radius: 8px;
+    transition-duration: 0.4s;
+    margin-left: auto;
+}
+
+.new-book-form button:hover {
+    background-color: rgb(117, 35, 35);
+    /* color: black; */
+}
+fieldset > div {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 10px;
+}
+
+
+.library-container button {
+    border: 2px solid black;
+    padding: 6px 15px;
+    background-color: rgb(121, 60, 60);
+    color: beige;
+    border-radius: 8px;
+    transition-duration: 0.3s;
+}
+
+.library-container button:hover {
+    border-color: rgba(245, 245, 220, 0.676);
+    /* color: black; */
+}
+.btn-remove svg {
+    display: flex;
+    background-color: none;
+}
+/* book card design  */
+.book-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: space-between;
+}
+.book-card div:last-child {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.btn-remove {
+    margin-left: auto;
+}
+
+
+/* checkbox  */
+input[type="checkbox"] {
+    appearance: none;
+    background-color: rgb(224, 224, 204);
+    margin: 0;
+    font: inherit;
+    color: currentColor;
+    width: 1.15em;
+    height: 1.15em;
+    border: 0.15em solid currentColor;
+    border-radius: 0.15em;
+    transform: translateY(-0.075em);
+    display: inline-grid;
+    place-content: center;
+  }
+  .form-control + .form-control {
+    margin-top: 1em;
+  }
+  input[type="checkbox"]::before {
+    content: "";
+    width: 0.65em;
+    height: 0.65em;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--form-control-color);
+  }
+  input[type="checkbox"]:checked::before {
+    transform: scale(1);
+    background-color: rgb(121, 60, 60);
+  }
+
+  fieldset {
+    border: 2px solid black;
+  }
+
+  /* input */
+  input[type="text"], input[type="number"] {
+    border: 2px solid black;
+    border-radius: 3px;
+    padding: 5px;
+    background-color: rgb(224, 224, 204);
+    width: 100%;
+  }
+
+  

@@ -1,5 +1,5 @@
 // variables
-let myLibrary = [];
+const myLibrary = [];
 const library = document.querySelector(".library-container");
 const form = document.querySelector("#form-book");
 const title = form.elements["title"];
@@ -7,6 +7,7 @@ const author = form.elements["author"];
 const pages = form.elements["pages"];
 const read = form.elements["read"];
 let btnRemove = document.querySelectorAll(".btn-remove");
+let readCard = document.querySelectorAll(".read-card");
 
 
 
@@ -46,12 +47,22 @@ function displayLibrary() {
 function addCardBookText(cardNode, newBook) {
     // let cardBook = document.createElement('div');
     let auxString = ""
-    read.checked ? auxString = "Yes" : auxString = "No";
-    cardNode.innerHTML = `<div>Title: <span>${title.value}</span></div>
-    <div>Author: <span>${author.value}</span></div>
-    <div>Pages: <span>${pages.value}</span></div>
-    <div>Read: <span>${auxString}</span></div>
-    <button class="btn-remove">Remove</button>`;
+    read.checked ? auxString = "checked" : auxString = "";
+
+    cardNode.innerHTML = `<div>
+                    <div>Title: ${title.value}</div>
+                    <div>Author: ${author.value}</div>
+                    <div>Pages: ${pages.value}</div>
+                </div>
+                <div>
+                    <label for="read">Read: </label>
+                    <input type="checkbox" ${auxString} name="read" class="read-card">
+                    <button class="btn-remove"><svg style="width:15px;height:15px" viewBox="0 0 24 24">
+                        <path fill="currentColor"
+                            d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M7,6H17V19H7V6M9,8V17H11V8H9M13,8V17H15V8H13Z" />
+                    </svg>
+                </button>
+                </div>`;
     // <div>ID: <span class=">${newBook.id} </span></div>
 
 }
@@ -63,18 +74,34 @@ function createCardBook() {
     bookCard.setAttribute("data-index", newBook.id);
     addCardBookText(bookCard, newBook); //take the form value and put into this card
     library.appendChild(bookCard);
-    removeBookAndUpdateList();
+    updateListEvents();
 }
 
 function removeBook(element) {
-    let bookId = element.parentElement.getAttribute("data-index");
+    let cardNode = element.parentElement.parentElement;
+    let bookId = cardNode.getAttribute("data-index");
+    
     myLibrary.forEach((element, index, array) => {
         if(element.id == bookId){
             myLibrary.splice(index, 1);
             displayLibrary();
         }
     });
-    element.parentElement.remove();
+    cardNode.remove();
+}
+function updateRead(element){
+    let cardNode = element.parentElement.parentElement;
+    let bookId = cardNode.getAttribute("data-index");
+
+    myLibrary.forEach((book) => {
+        if(book.id == bookId){
+            book.read ? book.read = false : book.read = true;
+            if(book.read){
+                console.log("now this book is read");
+            } else console.log("now this book is unread");
+            
+        }
+    });
 }
 
 // events
@@ -84,14 +111,30 @@ form.addEventListener("submit", (event) => {
     form.reset();
 })
 
-function removeBookAndUpdateList() {
+function updateListEvents() {
     btnRemove = document.querySelectorAll(".btn-remove");
+    readCard = document.querySelectorAll(".read-card");
+    // btnRemove.addEventListener('click', (event) => {
+    //     removeBook(element);
+    //     console.log("changed");
+    // });
+    
     Array.from(btnRemove).forEach(function (element) {
-        element.addEventListener('click', (event) => {
-            removeBook(element);
-        });
+        if(element.getAttribute('data-listener') !== 'true'){
+            element.setAttribute('data-listener', 'true');
+            element.addEventListener('click', (event) => {
+                removeBook(element);
+            });
+        }
+    });
+
+    Array.from(readCard).forEach(function (element) {
+        if(element.getAttribute('data-listener') !== 'true'){
+            element.setAttribute('data-listener', 'true');
+            element.addEventListener('change', (event) => {
+                updateRead(element);
+            });
+        }
     });
 }
-//   btnRemove.addEventListener("click", () =>{
-    // console.log("test");
-// })
+
